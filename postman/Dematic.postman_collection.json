@@ -1,0 +1,787 @@
+{
+	"info": {
+		"_postman_id": "87b226a2-b556-43fe-9616-864601ef855b",
+		"name": "Dematic",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "10001 Java A Beginner's Guide POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Java A Beginner's Guide\",\r\n    \"author\":\"Schildt\",\r\n    \"barcode\":10001,\r\n    \"quantity\":15,\r\n    \"price\":40\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10002 OCA Study Guide",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"OCA Study Guide\",\r\n    \"author\":\"Boyarsky Selikoff\",\r\n    \"barcode\":10002,\r\n    \"quantity\":60,\r\n    \"price\":10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10003 OCA/OCP Practice Test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"OCA Practice Test\",\r\n    \"author\":\"Boyarsky Selikoff\",\r\n    \"barcode\":10003,\r\n    \"quantity\":8,\r\n    \"price\":35\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10004 Java The Complete Reference",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"name\":\"Java The Complete Reference\",\r\n    \"author\":\"Schildt\",\r\n    \"barcode\":10004,\r\n    \"quantity\":10,\r\n    \"price\":60.8\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					]
+				},
+				"description": "Put"
+			},
+			"response": []
+		},
+		{
+			"name": "10005 Java OCA JAVA SE 8 Programmer I Certification Guide",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"name\":\"Java OCA JAVA SE 8 Programmer I Certification Guide\",\r\n    \"author\":\"Mala Gupta\",\r\n    \"barcode\":10005,\r\n    \"quantity\":12,\r\n    \"price\":42.5\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					]
+				},
+				"description": "Put"
+			},
+			"response": []
+		},
+		{
+			"name": "10006 OCA Java Programmer 8 Fundamentals 1Z0-808: OCAJP 8",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"name\":\"OCA Java Programmer 8 Fundamentals 1Z0-808: OCAJP 8\",\r\n    \"author\":\"Hanumant Deshmukh \",\r\n    \"barcode\":10006,\r\n    \"quantity\":5,\r\n    \"price\":30\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					]
+				},
+				"description": "Put"
+			},
+			"response": []
+		},
+		{
+			"name": "10007 Nailing 1Z0-808: Practical Guide to Oracle Java SE8 Programmer I Certification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"name\":\"Nailing 1Z0-808: Practical Guide to Oracle Java SE8 Programmer I Certification\",\r\n    \"author\":\" Igor Soudakevitch  \",\r\n    \"barcode\":10007,\r\n    \"quantity\":10,\r\n    \"price\":30\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					]
+				},
+				"description": "Put"
+			},
+			"response": []
+		},
+		{
+			"name": "10008 : OCA Java SE8 Programmer I Exam Guide",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"name\":\"OCA Java SE8 Programmer I Exam Guide\",\r\n    \"author\":\"Katz Sierra, Berth Bates\",\r\n    \"barcode\":10008,\r\n    \"quantity\":7,\r\n    \"price\":42\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					]
+				},
+				"description": "Put"
+			},
+			"response": []
+		},
+		{
+			"name": "10010 Java Coding Problems",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"name\":\"Java Coding Problems\",\r\n    \"author\":\"Leonhard\",\r\n    \"barcode\":10010,\r\n    \"quantity\":5,\r\n    \"price\":70.5\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10011 OCP Java SE11 Programmer I",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"name\":\"OCP Oracle Certified Professional Java SE 11 Programmer I Study Guide: Exam 1Z0-815 1st Edition\",\r\n    \"author\":\"Jeanne Boyarsky,  Scott Selikoff \",\r\n    \"barcode\":10011,\r\n    \"quantity\":8,\r\n    \"price\":75\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10101 I Promessi Sposi",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"I Promessi Sposi\",\r\n    \"author\":\"Manzoni\",\r\n    \"barcode\":10101,\r\n    \"quantity\":5,\r\n    \"price\":100,\r\n     \"releaseYear\":1827\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/antiquebooks/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"antiquebooks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10102 La divina commedia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"La divina commedia\",\r\n    \"author\":\"Dante Alighieri\",\r\n    \"barcode\":10102,\r\n    \"quantity\":5,\r\n    \"price\":100,\r\n     \"releaseYear\":1472\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/antiquebooks/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"antiquebooks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10201 Le Scienze",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Le Scienze\",\r\n    \"author\":\"Autori vari\",\r\n    \"barcode\":10201,\r\n    \"quantity\":10,\r\n    \"price\":8,\r\n     \"scienceIndex\":9\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sciencejournals/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sciencejournals",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10202 Nature",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Nature\",\r\n    \"author\":\"Nature Research\",\r\n    \"barcode\":10202,\r\n    \"quantity\":25,\r\n    \"price\":7.45,\r\n     \"scienceIndex\":8\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sciencejournals/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sciencejournals",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/books/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get by barcode",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/books/10001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"books",
+						"10001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get grouped by quantity New!",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/barcodelistNew/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"barcodelistNew",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get sorted by  bytotalprice New!",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/barcodelistbytotalpriceNew/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"barcodelistbytotalpriceNew",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET bookstotalprice",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/bookstotalprice/10001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookstotalprice",
+						"10001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET by quantity",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080//booksbyquantity/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"",
+						"booksbyquantity",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/deletebooks/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deletebooks",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete by Barcode",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/deletebybarcode/10201",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deletebybarcode",
+						"10201"
+					]
+				},
+				"description": "Delete"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/deleteall/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteall",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Name(test with invalid name)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/updatename/10001/♫☼►◄↕‼¶/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updatename",
+						"10001",
+						"♫☼►◄↕‼¶",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Name(test with valid name)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/updatename/10001/Java A Beginner's Guide/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updatename",
+						"10001",
+						"Java A Beginner's Guide",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE  Barcode",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/updatebarcode/10001/20001/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updatebarcode",
+						"10001",
+						"20001",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Price",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/updateprice/10101/100/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updateprice",
+						"10101",
+						"100",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Author",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/updateauthor/10001/Herbert Schildt/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updateauthor",
+						"10001",
+						"Herbert Schildt",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE release year",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/updatereleaseyear/10101/1828/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updatereleaseyear",
+						"10101",
+						"1828",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Quantity",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/updatequantity/10001/18/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updatequantity",
+						"10001",
+						"18",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE science index",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/updatescienceindex/10202/5/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updatescienceindex",
+						"10202",
+						"5",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
