@@ -92,8 +92,9 @@ public class BookRestController {
                 && !propertyName.equals("price") && !propertyName.equals("releaseyear")
                 && !propertyName.equals("scienceindex"))
             throw new NoSuchPropertyException("No property \"" + propertyName + "\" exists", propertyName);
-        if (propertyName.equals("name"))
+        if (propertyName.equals("name")){
             book.setTitle(newPropertyValue);
+        }
         if (propertyName.equals("author"))
             book.setAuthor(newPropertyValue);
         if (propertyName.equals("quantity")) {

@@ -33,7 +33,6 @@ class BookServiceTest {
         Book book = Book.builder()
                 .barcode(BARCODE)
                 .build();
-
         when(repository.findByBarcode(BARCODE)).thenReturn(List.of());
 
         service.create(book);
