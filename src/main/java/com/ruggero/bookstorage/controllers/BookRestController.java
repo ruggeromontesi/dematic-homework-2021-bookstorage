@@ -47,10 +47,9 @@ public class BookRestController {
      * @throws NoSuchMethodException
      * @throws MethodArgumentNotValidException
      */
-    @PostMapping(value = "")
+    @PostMapping(value = "/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Book createBook(@Valid @RequestBody Book book) {
-        util.validateBarcode(book.getBarcode(), repository.findAll());
         return bookService.create(book);
     }
 

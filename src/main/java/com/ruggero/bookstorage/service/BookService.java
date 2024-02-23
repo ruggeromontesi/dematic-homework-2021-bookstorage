@@ -7,14 +7,21 @@ import com.ruggero.bookstorage.repos.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BookService {
     private final BookRepository repository;
 
     public Book create(Book book) {
-        validateBarcode(book.getBarcode());
+        //validate(book.getBarcode());
         return repository.save(book);
+    }
+
+    private void validate(int inputBarcode) {
+        validateBarcode(inputBarcode);
+        validateBookWithSameBarcodeIsNotPresent(inputBarcode);
     }
 
     private void validateBarcode(int inputBarcode) {
@@ -27,5 +34,18 @@ public class BookService {
                 .ifPresent(book -> {
                     throw new RepeatedBarcodeException(inputBarcode);
                 });
+    }
+
+    private void validateBookWithSameBarcodeIsNotPresent(int inputBarcode) {
+        repository.findByBarcode(inputBarcode).stream()
+                .findAny()
+                .ifPresent(book -> {
+                    throw new RepeatedBarcodeException(inputBarcode);
+                });
+    }
+
+    public List<Book> findByBarcode(int barcode) {
+        validateBarcode(barcode);
+        return repository.findByBarcode(barcode);
     }
 }

@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.ruggero.bookstorage"},{"l":"com.ruggero.bookstorage.controllers"},{"l":"com.ruggero.bookstorage.entities"},{"l":"com.ruggero.bookstorage.repos"},{"l":"com.ruggero.bookstorage.service"}];updateSearchResults();
