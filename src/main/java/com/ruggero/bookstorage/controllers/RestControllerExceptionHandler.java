@@ -61,9 +61,7 @@ public class RestControllerExceptionHandler {
 		if (exception instanceof IllegalBarcodeException)
 			return new ResponseEntity<>("Barcode  cannot assume a negative value", HttpStatus.BAD_REQUEST);
 		if (exception instanceof RepeatedBarcodeException)
-			return new ResponseEntity<>(
-					"Barcode " + ((RepeatedBarcodeException) exception).getBarcode() + " is already present",
-					HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
 		if (exception instanceof NoSuchPropertyException)
 			return new ResponseEntity<>("The typed  property name: \""
 					+ ((NoSuchPropertyException) exception).getPropertyName()

@@ -1,6 +1,8 @@
 package com.ruggero.bookstorage.service;
 
 import com.ruggero.bookstorage.entities.Book;
+import com.ruggero.bookstorage.entities.errorsandexception.IllegalBarcodeException;
+import com.ruggero.bookstorage.entities.errorsandexception.RepeatedBarcodeException;
 import com.ruggero.bookstorage.repos.BookRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,19 +10,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class BookServiceTest {
-    private static final String TEST_TITLE = "test_title";
-    private static final String TEST_AUTHOR = "test_author";
-    private static final int TEST_BARCODE = 1004588;
-    private static final int TEST_QUANTITY = 11;
-    private static final double TEST_PRICE = 43.2;
+    private static final int BARCODE = 1004588;
     @InjectMocks
     private BookService service;
     @Mock
@@ -28,26 +30,39 @@ class BookServiceTest {
 
     @Test
     void shouldCreateBook_whenValidationOk() {
-        Book book = getBook();
+        Book book = Book.builder()
+                .barcode(BARCODE)
+                .build();
 
-        Book result = service.create(book);
+        when(repository.findByBarcode(BARCODE)).thenReturn(List.of());
+
+        service.create(book);
 
         verify(repository, times(1)).save(book);
-        assertAll(() -> {
-            assertThat(result.getTitle()).isEqualTo(book.getTitle());
-        });
-
-
     }
 
-    private Book getBook() {
-        return Book.builder()
-                .title(TEST_TITLE)
-                .author(TEST_AUTHOR)
-                .barcode(TEST_BARCODE)
-                .quantity(TEST_QUANTITY)
-                .price(TEST_PRICE)
+    @Test
+    void shouldThrow_whenNegativeBarcode() {
+        Book book = Book.builder()
+                .barcode(-BARCODE)
                 .build();
+
+        Exception e = assertThrows(IllegalBarcodeException.class, () -> service.create(book));
+
+        assertThat(e.getMessage()).isEqualTo(IllegalBarcodeException.NEGATIVE_BARCODE);
+        verifyNoInteractions(repository);
     }
 
+    @Test
+    void shouldThrow_whenExistsBookWithSameBarcode() {
+        Book book = Book.builder()
+                .barcode(BARCODE)
+                .build();
+        when(repository.findByBarcode(BARCODE)).thenReturn(List.of(Book.builder().build()));
+
+        Exception e = assertThrows(RepeatedBarcodeException.class, () -> service.create(book));
+
+        assertThat(e.getMessage()).isEqualTo(String.format(RepeatedBarcodeException.BARCODE_ALREADY_PRESENT, BARCODE));
+        verify(repository, times(1)).findByBarcode(anyInt());
+    }
 }

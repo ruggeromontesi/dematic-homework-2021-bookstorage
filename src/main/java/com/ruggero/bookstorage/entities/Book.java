@@ -1,5 +1,6 @@
 package com.ruggero.bookstorage.entities;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -8,12 +9,8 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import lombok.With;
 import org.springframework.validation.annotation.Validated;
-
-import jakarta.persistence.Entity;
 
 
 @Entity
@@ -42,7 +39,7 @@ public class Book {
     @Min(value = 0, message = "price cannot be negative")
     private double price;
 
-	public double getTotalPrice() {
-		return price * quantity;
-	}
+    public double getTotalPrice() {
+        return price * quantity;
+    }
 }

@@ -10,14 +10,14 @@ public class Util {
 
 	public Book getBookByBarcode(List<Book> list, int barcode) {
 		if (barcode < 0)
-			throw new IllegalBarcodeException("Barcode " + barcode + "cannot assume such value", barcode);
+			throw new IllegalBarcodeException(barcode);
 		List<Book> listByBarcode = new ArrayList<>();
 
 		for (Book book : list)
 			if (book.getBarcode() == barcode)
 				listByBarcode.add(book);
 
-		if (listByBarcode.size() == 0)
+		if (listByBarcode.isEmpty())
 			throw new BookNotFoundException("No book with barcode = " + barcode + " was found", barcode);
 		if (listByBarcode.size() == 1)
 			return listByBarcode.get(0);
@@ -39,12 +39,12 @@ public class Util {
 	public boolean validateBarcode(int inputBarcode, List<Book> list) {
 
 		if (inputBarcode < 0)
-			throw new IllegalBarcodeException("Negative Barcode", inputBarcode);
+			throw new IllegalBarcodeException(inputBarcode);
 
 		if (!list.isEmpty())
 			for (Book bookint : list)
 				if (bookint.getBarcode() == inputBarcode)
-					throw new RepeatedBarcodeException("Barcode " + inputBarcode + " is already present", inputBarcode);
+					throw new RepeatedBarcodeException(inputBarcode);
 
 		return true;
 	}

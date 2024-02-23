@@ -15,18 +15,17 @@ public class BookService {
     public Book create(Book book) {
         validateBarcode(book.getBarcode());
         return repository.save(book);
-
     }
 
     private void validateBarcode(int inputBarcode) {
         if (inputBarcode < 0) {
-            throw new IllegalBarcodeException("Negative Barcode", inputBarcode);
+            throw new IllegalBarcodeException(inputBarcode);
         }
 
         repository.findByBarcode(inputBarcode).stream()
                 .findAny()
                 .ifPresent(book -> {
-                    throw new RepeatedBarcodeException("Barcode " + inputBarcode + " is already present", inputBarcode);
+                    throw new RepeatedBarcodeException(inputBarcode);
                 });
     }
 }
