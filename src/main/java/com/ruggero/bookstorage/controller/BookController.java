@@ -1,12 +1,7 @@
 package com.ruggero.bookstorage.controller;
 
-import com.ruggero.bookstorage.entities.AntiqueBook;
 import com.ruggero.bookstorage.entities.Book;
-import com.ruggero.bookstorage.entities.ScienceJournal;
 import com.ruggero.bookstorage.entities.errorsandexception.IllegalBarcodeCriteriaException;
-import com.ruggero.bookstorage.entities.errorsandexception.NoSuchPropertyException;
-import com.ruggero.bookstorage.entities.errorsandexception.NotAScienceJournalException;
-import com.ruggero.bookstorage.entities.errorsandexception.NotAnAntiqueBookException;
 import com.ruggero.bookstorage.repos.BookRepository;
 import com.ruggero.bookstorage.service.BookService;
 import com.ruggero.bookstorage.service.Util;
@@ -14,39 +9,35 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 @RestController
 @RequestMapping("/books")
 @RequiredArgsConstructor
 public class BookController {
-    BookRepository repository;
+    private final BookRepository repository;
     private final BookService bookService;
 
     Util util = new Util();
 
     /**
      * CREATE A client can use a REST call to put an ScienceJournal into the system
-     * providing name, author, barcode, quantity and unit price
-     *
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws MethodArgumentNotValidException
-     */
+     * providing name, author, barcode, quantity and unit price*/
     @PostMapping(value = "/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Book createBook(@Valid @RequestBody Book book) {
@@ -55,11 +46,9 @@ public class BookController {
 
     /**
      * A client can use a REST call to retrieve book’s information from a system by
-     * providing its barcode.
-     */
+     * providing its barcode.*/
     @GetMapping(value = "/{barcode}")
     public ResponseEntity<Book> fetchBookByBarcode(@Valid @PathVariable("barcode") int barcode) {
-        //Book book = util.getBookByBarcode(repository.findAll(), barcode);
         Book book = bookService.findByBarcode(barcode);
         return ResponseEntity.ok(book);
     }
@@ -75,52 +64,11 @@ public class BookController {
 
     /**
      * UPDATE:client can use this REST call to update book attributes providing the
-     * barcode and updated field information.
-     *
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws NumberFormatException
-     * @throws MethodArgumentNotValidException
-     */
-    @RequestMapping(value = "/{barcode}/{propertyName}/{newPropertyValue}", method = RequestMethod.PUT)
-    public ResponseEntity<Book> update(@PathVariable("barcode") int barcode,
-                                       @PathVariable("propertyName") final String propertyName,
-                                       @PathVariable("newPropertyValue") String newPropertyValue) {
-        Book book = util.getBookByBarcode(repository.findAll(), barcode);
-
-        if (!propertyName.equals("name") && !propertyName.equals("author") && !propertyName.equals("quantity")
-                && !propertyName.equals("price") && !propertyName.equals("releaseyear")
-                && !propertyName.equals("scienceindex"))
-            throw new NoSuchPropertyException("No property \"" + propertyName + "\" exists", propertyName);
-        if (propertyName.equals("name")){
-            book.setTitle(newPropertyValue);
-        }
-        if (propertyName.equals("author"))
-            book.setAuthor(newPropertyValue);
-        if (propertyName.equals("quantity")) {
-            int quantity = Integer.parseInt(newPropertyValue);
-            util.validateQuantity(quantity);
-            book.setQuantity(quantity);
-        }
-        if (propertyName.equals("price")) {
-            double price = Double.parseDouble(newPropertyValue);
-            util.validatePrice(price);
-            book.setPrice(price);
-        }
-        if (propertyName.equals("releaseyear"))
-            if (!(book instanceof AntiqueBook))
-                throw new NotAnAntiqueBookException("Book with barcode : " + barcode + " is not an antique book",
-                        barcode);
-            else
-                ((AntiqueBook) book).setReleaseYear(util.validateReleaseYear(Integer.parseInt(newPropertyValue)));
-        if (propertyName.equals("scienceindex"))
-            if (!(book instanceof ScienceJournal))
-                throw new NotAScienceJournalException("Book with barcode : " + barcode + " is not a science journal",
-                        barcode);
-            else
-                ((ScienceJournal) book).setScienceIndex(util.validateScienceIndex(Integer.parseInt(newPropertyValue)));
-        repository.save(book);
-        return ResponseEntity.ok(book);
+     * barcode and updated field information.*/
+    @PutMapping(value = "/update")
+    public ResponseEntity<Book> update(@RequestBody Book book) {
+        Book updatedBook = bookService.updateBook(book);
+        return ResponseEntity.ok(updatedBook);
     }
 
     @GetMapping(value = "/barcodelist/{criteria}")
@@ -153,6 +101,22 @@ public class BookController {
             }
         }
         return map;
+    }
+
+
+    @GetMapping("/barcodes/grouped/quantity")
+    public ResponseEntity<Map<Integer, Set<Integer>>> barcodesGroupedByQuantity() {
+        var result = bookService.getBarcodesGroupedByQuantity();
+        return ResponseEntity.ok(result);
+    }
+
+    /* A client can use a REST call to request a list of all barcodes for the books in stock grouped by quantity
+      o Optional – barcodes for each group sorted by total price */
+
+    @GetMapping("/barcodes/grouped/quantity/totalprice")
+    public ResponseEntity<Map<Integer, Set<Integer>>> barcodesGroupedByQuantityAndSortedByTotalPrice() {
+        var result = bookService.getBarcodesGroupedByQuantityAndSortedByTotalPrice();
+        return ResponseEntity.ok(result);
     }
 
     /**

@@ -27,14 +27,6 @@ import com.ruggero.bookstorage.entities.errorsandexception.NotAScienceJournalExc
 import com.ruggero.bookstorage.entities.errorsandexception.NotAnAntiqueBookException;
 import com.ruggero.bookstorage.entities.errorsandexception.RepeatedBarcodeException;
 
-/**
- * Exception handler methods > naming policy : handle +
- * ExceptionName-"Exception"
- *
- * @author rugge
- *
- */
-
 @ControllerAdvice
 public class RestControllerExceptionHandler {
 

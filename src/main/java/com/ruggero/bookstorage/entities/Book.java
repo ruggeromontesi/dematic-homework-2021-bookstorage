@@ -34,10 +34,10 @@ public class Book {
     @Min(value = 1, message = "barcode is required, min value is 1")
     private int barcode;
 
-    @Min(value = 1, message = "the minimum quantity value is 1")
-    private int quantity;
+    @Min(value = 0, message = "the minimum quantity value is 0")
+    private Integer quantity;
     @Min(value = 0, message = "price cannot be negative")
-    private double price;
+    private Double price;
 
     public double getTotalPrice() {
         return price * quantity;
