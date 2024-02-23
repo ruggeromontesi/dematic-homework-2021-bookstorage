@@ -1,9 +1,11 @@
 package com.ruggero.bookstorage.entities;
 
 import java.time.LocalDate;
+import jakarta.persistence.Entity;
 
-import javax.persistence.Entity;
-import javax.validation.constraints.*;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.validation.annotation.Validated;
 
 @Entity

@@ -1,12 +1,13 @@
 package com.ruggero.bookstorage.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.ruggero.bookstorage.entities.AntiqueBook;
 import com.ruggero.bookstorage.repos.BookRepository;
 import com.ruggero.bookstorage.service.Util;
 
-import javax.validation.Valid;
+//import javax.validation.Valid;
 
 @RequestMapping("/books")
 @RestController
@@ -22,7 +23,8 @@ public class AntiqueBookRestController {
 	 * providing name, author, barcode, quantity and unit price
 	 */
 	@PostMapping(value = "/antiquebook/")
-	public AntiqueBook createAntiqueBook(@Valid @RequestBody AntiqueBook antiqueBook) {
+	//public AntiqueBook createAntiqueBook(@Valid @RequestBody AntiqueBook antiqueBook) {
+	public AntiqueBook createAntiqueBook(@RequestBody AntiqueBook antiqueBook) {
 		util.validateBarcode(antiqueBook.getBarcode(), repository.findAll());
 		return repository.save(antiqueBook);
 	}

@@ -10,6 +10,7 @@ import com.ruggero.bookstorage.entities.errorsandexception.NotAnAntiqueBookExcep
 import com.ruggero.bookstorage.repos.BookRepository;
 import com.ruggero.bookstorage.service.BookService;
 import com.ruggero.bookstorage.service.Util;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -92,7 +93,7 @@ public class BookRestController {
                 && !propertyName.equals("scienceindex"))
             throw new NoSuchPropertyException("No property \"" + propertyName + "\" exists", propertyName);
         if (propertyName.equals("name"))
-            book.setName(newPropertyValue);
+            book.setTitle(newPropertyValue);
         if (propertyName.equals("author"))
             book.setAuthor(newPropertyValue);
         if (propertyName.equals("quantity")) {

@@ -1,12 +1,13 @@
 package com.ruggero.bookstorage.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.ruggero.bookstorage.entities.ScienceJournal;
 import com.ruggero.bookstorage.repos.BookRepository;
 import com.ruggero.bookstorage.service.Util;
-import javax.validation.Valid;
+
 
 @RequestMapping("/books")
 @RestController

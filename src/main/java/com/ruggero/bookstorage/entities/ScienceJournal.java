@@ -5,9 +5,10 @@ but also have a science index (int between 1 – 10).
 
 package com.ruggero.bookstorage.entities;
 
-import javax.persistence.Entity;
-import javax.validation.constraints.*;
 
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.validation.annotation.Validated;
 
 @Entity

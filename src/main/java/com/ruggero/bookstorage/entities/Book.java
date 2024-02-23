@@ -1,23 +1,32 @@
 package com.ruggero.bookstorage.entities;
 
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.With;
 import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Entity;
+
 
 @Entity
 @Validated
 @Data
+@RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Book {
 
     @NotBlank
     @Size(min = 5, max = 100, message = "name length between 5 and 100 character")
-    private String name;
+    private String title;
 
     @NotBlank
     @Size(min = 5, max = 100, message = "author length between 5 and 100 character")
