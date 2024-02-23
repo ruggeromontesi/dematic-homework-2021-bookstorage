@@ -1,4 +1,4 @@
-package com.ruggero.bookstorage.controllers;
+package com.ruggero.bookstorage.controller;
 
 import com.ruggero.bookstorage.entities.AntiqueBook;
 import com.ruggero.bookstorage.entities.Book;
@@ -33,7 +33,7 @@ import java.util.TreeMap;
 @RestController
 @RequestMapping("/books")
 @RequiredArgsConstructor
-public class BookRestController {
+public class BookController {
     BookRepository repository;
     private final BookService bookService;
 
@@ -59,7 +59,8 @@ public class BookRestController {
      */
     @GetMapping(value = "/{barcode}")
     public ResponseEntity<Book> fetchBookByBarcode(@Valid @PathVariable("barcode") int barcode) {
-        Book book = util.getBookByBarcode(repository.findAll(), barcode);
+        //Book book = util.getBookByBarcode(repository.findAll(), barcode);
+        Book book = bookService.findByBarcode(barcode);
         return ResponseEntity.ok(book);
     }
 

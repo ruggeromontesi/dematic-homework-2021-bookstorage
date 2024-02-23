@@ -1,4 +1,4 @@
-package com.ruggero.bookstorage.controllers;
+package com.ruggero.bookstorage.controller;
 
 import java.util.Collections;
 import java.util.List;
@@ -55,9 +55,7 @@ public class RestControllerExceptionHandler {
 	@ExceptionHandler(value = RuntimeException.class)
 	public HttpEntity<String> handleException(RuntimeException exception) {
 		if (exception instanceof BookNotFoundException)
-			return new ResponseEntity<>(
-					"No book found with barcode " + ((BookNotFoundException) exception).getBarcode(),
-					HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
 		if (exception instanceof IllegalBarcodeException)
 			return new ResponseEntity<>("Barcode  cannot assume a negative value", HttpStatus.BAD_REQUEST);
 		if (exception instanceof RepeatedBarcodeException)

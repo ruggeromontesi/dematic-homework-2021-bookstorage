@@ -18,12 +18,11 @@ public class Util {
 				listByBarcode.add(book);
 
 		if (listByBarcode.isEmpty())
-			throw new BookNotFoundException("No book with barcode = " + barcode + " was found", barcode);
+			throw new BookNotFoundException(barcode);
 		if (listByBarcode.size() == 1)
 			return listByBarcode.get(0);
 		else
-			throw new RepeatedBarcodeInExistingRepositoryException(
-					"Corrupted data! More than one book with this barcode: " + barcode, barcode);
+			throw new ExistingBarcodeException(barcode);
 	}
 
 	public void validateQuantity(int quantity) {

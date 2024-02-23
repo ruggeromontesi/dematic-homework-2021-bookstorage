@@ -1,4 +1,4 @@
-package com.ruggero.bookstorage.controllers;
+package com.ruggero.bookstorage.controller;
 
 import com.ruggero.bookstorage.entities.AntiqueBook;
 import com.ruggero.bookstorage.repos.BookRepository;

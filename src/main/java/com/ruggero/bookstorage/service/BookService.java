@@ -1,6 +1,8 @@
 package com.ruggero.bookstorage.service;
 
 import com.ruggero.bookstorage.entities.Book;
+import com.ruggero.bookstorage.entities.errorsandexception.BookNotFoundException;
+import com.ruggero.bookstorage.entities.errorsandexception.ExistingBarcodeException;
 import com.ruggero.bookstorage.entities.errorsandexception.IllegalBarcodeException;
 import com.ruggero.bookstorage.entities.errorsandexception.RepeatedBarcodeException;
 import com.ruggero.bookstorage.repos.BookRepository;
@@ -15,7 +17,7 @@ public class BookService {
     private final BookRepository repository;
 
     public Book create(Book book) {
-        //validate(book.getBarcode());
+        validate(book.getBarcode());
         return repository.save(book);
     }
 
@@ -44,8 +46,15 @@ public class BookService {
                 });
     }
 
-    public List<Book> findByBarcode(int barcode) {
+    public Book findByBarcode(int barcode) {
         validateBarcode(barcode);
-        return repository.findByBarcode(barcode);
+        List<Book> books = repository.findByBarcode(barcode);
+        if (books.isEmpty()) {
+            throw new BookNotFoundException(barcode);
+        }
+        if (books.size() > 1) {
+            throw new ExistingBarcodeException(barcode);
+        }
+        return books.stream().findFirst().orElseThrow();
     }
 }
