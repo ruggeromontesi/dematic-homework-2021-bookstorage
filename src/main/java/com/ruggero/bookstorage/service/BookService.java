@@ -9,7 +9,6 @@ import com.ruggero.bookstorage.repos.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +84,7 @@ public class BookService {
 
         Map<Integer, Set<Integer>> result = new TreeMap<>();
 
-        for(Integer qty : booksByQuantity.keySet()) {
+        for (Integer qty : booksByQuantity.keySet()) {
             TreeSet<Book> sortedByTotalPrice = new TreeSet<>(Comparator.comparingDouble(Book::getTotalPrice));
             sortedByTotalPrice.addAll(booksByQuantity.get(qty));
             result.put(qty, sortedByTotalPrice.stream().map(Book::getBarcode).collect(Collectors.toSet()));
