@@ -12,6 +12,8 @@ spring:
  jpa:
    show-sql: true
 
+ thymeleaf:
+   check-template-location: false
 logging:
   level:
     org:

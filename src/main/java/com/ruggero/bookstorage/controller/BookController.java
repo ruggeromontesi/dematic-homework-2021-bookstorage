@@ -41,8 +41,9 @@ public class BookController {
      */
     @PostMapping(value = "/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Book createBook(@Valid @RequestBody Book book) {
-        return bookService.create(book);
+    public ResponseEntity<Book> createBook(@Valid @RequestBody Book book) {
+        Book savedBook =  bookService.create(book);
+        return ResponseEntity.ok(savedBook);
     }
 
     /**
