@@ -65,7 +65,7 @@ public class TestHelper {
                 .build();
     }
 
-    public List<Book> getBooks() {
+    public static List<Book> getBooks() {
         return List.of(
                 getBook1(),
                 getBook2(),

@@ -11,7 +11,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import static com.ruggero.bookstorage.service.TestHelper.getBooks;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -63,5 +66,19 @@ class BookServiceTest {
 
         assertThat(e.getMessage()).isEqualTo(String.format(RepeatedBarcodeException.BARCODE_ALREADY_PRESENT, BARCODE));
         verify(repository, times(1)).findByBarcode(anyInt());
+    }
+
+    @Test
+    void shouldOrderByQuantity() {
+        when(repository.findAll()).thenReturn(getBooks());
+
+        RuggeroBookService service = new RuggeroBookService(repository);
+
+        Map<Integer, Set<Integer>> result = service.getBarcodesGroupedByQuantity();
+
+        assertThat(result).isEqualTo(Map.of(
+                1, Set.of(4,5,6),
+                10, Set.of(1,2,3)
+        ));
     }
 }

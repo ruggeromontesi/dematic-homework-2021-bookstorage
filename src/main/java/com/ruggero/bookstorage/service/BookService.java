@@ -14,13 +14,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class BookService {
+public class BookService implements BookUseCase {
     private final BookRepository repository;
 
     public Book create(Book book) {
@@ -83,14 +81,12 @@ public class BookService {
         Map<Integer, List<Book>> booksByQuantity = repository.findAll().stream()
                 .collect(Collectors.groupingBy(Book::getQuantity));
 
-        Map<Integer, Set<Integer>> result = new TreeMap<>();
-
         return booksByQuantity.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, e ->
-                    e.getValue().stream()
-                            .sorted(Comparator.comparingDouble(Book::getTotalPrice))
-                            .map(Book::getBarcode)
-                            .collect(Collectors.toSet())
+                        e.getValue().stream()
+                                .sorted(Comparator.comparingDouble(Book::getTotalPrice))
+                                .map(Book::getBarcode)
+                                .collect(Collectors.toSet())
                 ));
 
 

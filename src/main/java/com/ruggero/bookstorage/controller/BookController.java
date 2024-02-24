@@ -3,7 +3,7 @@ package com.ruggero.bookstorage.controller;
 import com.ruggero.bookstorage.entities.Book;
 import com.ruggero.bookstorage.entities.errorsandexception.IllegalBarcodeCriteriaException;
 import com.ruggero.bookstorage.repos.BookRepository;
-import com.ruggero.bookstorage.service.BookService;
+import com.ruggero.bookstorage.service.BookUseCase;
 import com.ruggero.bookstorage.service.Util;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,13 +31,14 @@ import java.util.TreeMap;
 @RequiredArgsConstructor
 public class BookController {
     private final BookRepository repository;
-    private final BookService bookService;
+    private final BookUseCase bookService;
 
     Util util = new Util();
 
     /**
      * CREATE A client can use a REST call to put an ScienceJournal into the system
-     * providing name, author, barcode, quantity and unit price*/
+     * providing name, author, barcode, quantity and unit price
+     */
     @PostMapping(value = "/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Book createBook(@Valid @RequestBody Book book) {
@@ -46,7 +47,8 @@ public class BookController {
 
     /**
      * A client can use a REST call to retrieve book’s information from a system by
-     * providing its barcode.*/
+     * providing its barcode.
+     */
     @GetMapping(value = "/{barcode}")
     public ResponseEntity<Book> fetchBookByBarcode(@Valid @PathVariable("barcode") int barcode) {
         Book book = bookService.findByBarcode(barcode);
@@ -64,7 +66,8 @@ public class BookController {
 
     /**
      * UPDATE:client can use this REST call to update book attributes providing the
-     * barcode and updated field information.*/
+     * barcode and updated field information.
+     */
     @PutMapping(value = "/update")
     public ResponseEntity<Book> update(@RequestBody Book book) {
         Book updatedBook = bookService.updateBook(book);
