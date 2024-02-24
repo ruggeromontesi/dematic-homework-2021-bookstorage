@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -84,12 +85,14 @@ public class BookService {
 
         Map<Integer, Set<Integer>> result = new TreeMap<>();
 
-        for (Integer qty : booksByQuantity.keySet()) {
-            TreeSet<Book> sortedByTotalPrice = new TreeSet<>(Comparator.comparingDouble(Book::getTotalPrice));
-            sortedByTotalPrice.addAll(booksByQuantity.get(qty));
-            result.put(qty, sortedByTotalPrice.stream().map(Book::getBarcode).collect(Collectors.toSet()));
-        }
+        return booksByQuantity.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, e ->
+                    e.getValue().stream()
+                            .sorted(Comparator.comparingDouble(Book::getTotalPrice))
+                            .map(Book::getBarcode)
+                            .collect(Collectors.toSet())
+                ));
 
-        return result;
+
     }
 }
