@@ -2,6 +2,7 @@ package com.ruggero.bookstorage.controller;
 
 import com.ruggero.bookstorage.entities.Book;
 import com.ruggero.bookstorage.repos.BookRepository;
+import com.ruggero.bookstorage.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,20 +16,20 @@ import java.util.List;
 @RequestMapping("/books")
 @RequiredArgsConstructor
 public class UtilController {
-    private final BookRepository repository;
+    private final BookService service;
 
     @GetMapping(value = "")
-    public List<Book> getBooks() {
-        return repository.findAll();
+    public List<Book> getAllBooks() {
+        return service.findAll();
     }
 
     @DeleteMapping(value = "/delete/all")
     public void deleteAll() {
-        repository.deleteAll();
+        service.deleteAll();
     }
 
     @DeleteMapping(value = "/{barcode}")
     public void deleteByBarcode(@PathVariable("barcode") int barcode) {
-        repository.deleteById(barcode);
+        service.deleteById(barcode);
     }
 }

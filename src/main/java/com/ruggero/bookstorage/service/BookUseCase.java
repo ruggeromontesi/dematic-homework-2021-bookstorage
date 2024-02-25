@@ -2,6 +2,7 @@ package com.ruggero.bookstorage.service;
 
 import com.ruggero.bookstorage.entities.Book;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -12,4 +13,5 @@ public interface BookUseCase {
     double getTotalPriceByBarcode(int barcode);
     Map<Integer, Set<Integer>> getBarcodesGroupedByQuantity();
     Map<Integer, Set<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice();
+    List<Book> findAll();
 }

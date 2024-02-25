@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -38,13 +39,20 @@ public class RuggeroBookService implements BookUseCase {
     }
 
     @Override
+    public double getTotalPriceByBarcode(int barcode) {
+        return 0;
+    }
+
+    @Override
     public Map<Integer, Set<Integer>> getBarcodesGroupedByQuantity() {
 
         Supplier<Map<Integer, Set<Book>>> supplier = HashMap::new;
+
         BiConsumer<Map<Integer, Set<Book>>, Book> accumulator = (mapContainer, book) -> {
             mapContainer.computeIfAbsent(book.getQuantity(), qty -> new TreeSet<>(Comparator.comparingDouble(Book::getTotalPrice)));
             mapContainer.get(book.getQuantity()).add(book);
         };
+
         BinaryOperator<Map<Integer, Set<Book>>> combiner = (m1, m2) -> {
             for (Integer qty : m2.keySet()) {
                 m1.computeIfAbsent(qty, missingKey -> {
@@ -57,23 +65,31 @@ public class RuggeroBookService implements BookUseCase {
             }
             return m1;
         };
+
         Function<Map<Integer, Set<Book>>, Map<Integer, Set<Integer>>> finisher = integerSetMap -> {
             Map<Integer, Set<Integer>> sortedBooks = new HashMap<>();
-
-
             for (int qty : integerSetMap.keySet()) {
                 Set<Integer> a = integerSetMap.get(qty).stream().map(Book::getBarcode).collect(Collectors.toSet());
                 sortedBooks.put(qty, a);
             }
             return sortedBooks;
         };
-        Collector<Book, Map<Integer, Set<Book>>, Map<Integer, Set<Integer>>> collector = Collector.of(supplier, accumulator, combiner, finisher);
+        Collector<Book, Map<Integer, Set<Book>>, Map<Integer, Set<Integer>>> collector = Collector.of(
+                supplier,
+                accumulator,
+                combiner,
+                finisher);
 
         return repository.findAll().stream().collect(collector);
     }
 
     @Override
     public Map<Integer, Set<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice() {
+        return null;
+    }
+
+    @Override
+    public List<Book> findAll() {
         return null;
     }
 }

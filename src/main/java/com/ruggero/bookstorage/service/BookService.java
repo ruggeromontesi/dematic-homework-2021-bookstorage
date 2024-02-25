@@ -7,6 +7,7 @@ import com.ruggero.bookstorage.entities.errorsandexception.IllegalBarcodeExcepti
 import com.ruggero.bookstorage.entities.errorsandexception.RepeatedBarcodeException;
 import com.ruggero.bookstorage.repos.BookRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -16,7 +17,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-@Service
+@Component("bookService")
 @RequiredArgsConstructor
 public class BookService implements BookUseCase {
     private final BookRepository repository;
@@ -99,5 +100,17 @@ public class BookService implements BookUseCase {
                 ));
 
 
+    }
+
+    public List<Book> findAll() {
+        return repository.findAll();
+    }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
+    public void deleteById(int barcode) {
+        repository.deleteById(barcode);
     }
 }
