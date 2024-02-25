@@ -11,7 +11,7 @@ import com.ruggero.bookstorage.service.Util;
 
 @RequestMapping("/books")
 @RestController
-public class ScienceJournalRestController {
+public class ScienceJournalController {
 
 	@Autowired
 	BookRepository repository;

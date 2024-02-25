@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/books")
 @RestController
 @RequiredArgsConstructor
-public class AntiqueBookRestController {
+public class AntiqueBookController {
 
     private final BookRepository repository;
 
