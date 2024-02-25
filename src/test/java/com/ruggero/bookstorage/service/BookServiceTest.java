@@ -3,7 +3,7 @@ package com.ruggero.bookstorage.service;
 import com.ruggero.bookstorage.entities.Book;
 import com.ruggero.bookstorage.entities.errorsandexception.IllegalBarcodeException;
 import com.ruggero.bookstorage.entities.errorsandexception.RepeatedBarcodeException;
-import com.ruggero.bookstorage.repos.BookRepository;
+import com.ruggero.bookstorage.repository.BookRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -69,16 +69,14 @@ class BookServiceTest {
     }
 
     @Test
-    void shouldOrderByQuantity() {
+    void shouldOrderByQuantityAndSortByTotalPrice() {
         when(repository.findAll()).thenReturn(getBooks());
-
-        RuggeroBookService service = new RuggeroBookService(repository);
 
         Map<Integer, Set<Integer>> result = service.getBarcodesGroupedByQuantity();
 
         assertThat(result).isEqualTo(Map.of(
-                1, Set.of(4,5,6),
-                10, Set.of(1,2,3)
+                1, Set.of(6, 5, 4),
+                10, Set.of(1, 2, 3)
         ));
     }
 }

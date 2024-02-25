@@ -5,7 +5,7 @@ import com.ruggero.bookstorage.entities.errorsandexception.BookNotFoundException
 import com.ruggero.bookstorage.entities.errorsandexception.ExistingBarcodeException;
 import com.ruggero.bookstorage.entities.errorsandexception.IllegalBarcodeException;
 import com.ruggero.bookstorage.entities.errorsandexception.RepeatedBarcodeException;
-import com.ruggero.bookstorage.repos.BookRepository;
+import com.ruggero.bookstorage.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -96,17 +96,10 @@ public class BookService implements BookUseCase {
 
     @Override
     public Map<Integer, List<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice() {
-//        Map<Integer, List<Book>> booksByQuantity = repository.findAll().stream()
-//                .collect(Collectors.groupingBy(Book::getQuantity));
-//
-//        return booksByQuantity.entrySet().stream()
-//                .collect(Collectors.toMap(Map.Entry::getKey, e ->
-//                        e.getValue().stream()
-//                                .sorted(Comparator.comparingDouble(b -> b.getPrice() * b.getQuantity()))
-//                                .map(Book::getBarcode)
-//                                .collect(Collectors.toSet());
+        return repository.findAll().stream().collect(getBookMapMapCollector());
+    }
 
-
+    private static Collector<Book, Map<Integer, Set<Book>>, Map<Integer, List<Integer>>> getBookMapMapCollector() {
         Supplier<Map<Integer, Set<Book>>> supplier = HashMap::new;
 
         BiConsumer<Map<Integer, Set<Book>>, Book> accumulator = (mapContainer, book) -> {
@@ -135,14 +128,7 @@ public class BookService implements BookUseCase {
             }
             return sortedBooks;
         };
-        Collector<Book, Map<Integer, Set<Book>>, Map<Integer, List<Integer>>> collector = Collector.of(
-                supplier,
-                accumulator,
-                combiner,
-                finisher);
-
-        return repository.findAll().stream().collect(collector);
-
+        return Collector.of(supplier, accumulator, combiner, finisher);
     }
 
     @Override
@@ -157,6 +143,6 @@ public class BookService implements BookUseCase {
 
     @Override
     public void deleteById(int barcode) {
-        repository.deleteById(barcode);
+        repository.deleteByBarcode(barcode);
     }
 }

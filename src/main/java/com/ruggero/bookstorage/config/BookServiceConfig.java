@@ -1,6 +1,6 @@
 package com.ruggero.bookstorage.config;
 
-import com.ruggero.bookstorage.repos.BookRepository;
+import com.ruggero.bookstorage.repository.BookRepository;
 import com.ruggero.bookstorage.service.BookService;
 import com.ruggero.bookstorage.service.BookUseCase;
 import org.springframework.context.annotation.Bean;

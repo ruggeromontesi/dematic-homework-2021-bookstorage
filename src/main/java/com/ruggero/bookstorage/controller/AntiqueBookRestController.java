@@ -1,7 +1,7 @@
 package com.ruggero.bookstorage.controller;
 
 import com.ruggero.bookstorage.entities.AntiqueBook;
-import com.ruggero.bookstorage.repos.BookRepository;
+import com.ruggero.bookstorage.repository.BookRepository;
 import com.ruggero.bookstorage.service.Util;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
