@@ -15,12 +15,11 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import static com.ruggero.bookstorage.service.TestHelper.BARCODE_1;
 import static com.ruggero.bookstorage.service.TestHelper.PRICE_1_0;
 import static com.ruggero.bookstorage.service.TestHelper.QUANTITY_10;
-import static com.ruggero.bookstorage.service.TestHelper.getBook;
+import static com.ruggero.bookstorage.service.TestHelper.getBook1;
 import static com.ruggero.bookstorage.service.TestHelper.getBooks;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -42,7 +41,7 @@ public class BookIntegrationTest {
     @Test
     void shouldCreateBook() {
         RestTemplate restTemplate = new RestTemplate();
-        Book book = getBook();
+        Book book = getBook1();
 
         Book response = restTemplate.postForObject(BASE_URL + "/create", new HttpEntity<>(book), Book.class);
 
@@ -61,7 +60,7 @@ public class BookIntegrationTest {
 
     @Test
     void shouldGetBook() {
-        Book book = getBook();
+        Book book = getBook1();
         service.create(book);
         RestTemplate restTemplate = new RestTemplate();
 
@@ -75,7 +74,7 @@ public class BookIntegrationTest {
 
     @Test
     void shouldUpdate() {
-        Book book = getBook();
+        Book book = getBook1();
         service.create(book);
         Book updateBook = Book.builder()
                 .barcode(BARCODE_1)
@@ -97,7 +96,7 @@ public class BookIntegrationTest {
 
     @Test
     void shouldGetTotalPrice() {
-        service.create(getBook());
+        service.create(getBook1());
         RestTemplate restTemplate = new RestTemplate();
 
         Double response = restTemplate.getForObject(BASE_URL + "/" + BARCODE_1 + "/totalprice", Double.class);

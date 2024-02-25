@@ -19,11 +19,14 @@ public class TestHelper {
     public static final int BARCODE_1 = 1;
     public static final int BARCODE_2 = 2;
     public static final int BARCODE_3 = 3;
+    public static final int BARCODE_4 = 4;
+    public static final int BARCODE_5 = 5;
+    public static final int BARCODE_6 = 6;
     public static final double PRICE_1_0 = 1.0;
     public static final double PRICE_2_0 = 2.0;
     public static final double PRICE_3_0 = 3.0;
 
-    public static Book getBook() {
+    public static Book getBook1() {
         return Book.builder()
                 .title(JAVA_A_BEGINNER_S_GUIDE)
                 .author(SCHILDT)
@@ -57,7 +60,7 @@ public class TestHelper {
         return Book.builder()
                 .title(JAVA_THE_COMPLETE_REFERENCE)
                 .author(SCHILDT)
-                .barcode(4)
+                .barcode(BARCODE_4)
                 .quantity(QUANTITY_1)
                 .price(PRICE_3_0)
                 .build();
@@ -67,7 +70,7 @@ public class TestHelper {
         return Book.builder()
                 .title(JAVA_OCA_JAVA_SE_8_PROGRAMMER_I_CERTIFICATION_GUIDE)
                 .author(MALA_GUPTA)
-                .barcode(5)
+                .barcode(BARCODE_5)
                 .quantity(QUANTITY_1)
                 .price(PRICE_2_0)
                 .build();
@@ -77,7 +80,7 @@ public class TestHelper {
         return Book.builder()
                 .title(OCA_JAVA_PROGRAMMER_8_FUNDAMENTALS_1_Z_0_808_OCAJP_8)
                 .author(HANUMANT_DESHMUKH)
-                .barcode(6)
+                .barcode(BARCODE_6)
                 .quantity(QUANTITY_1)
                 .price(PRICE_1_0)
                 .build();
@@ -85,7 +88,7 @@ public class TestHelper {
 
     public static List<Book> getBooks() {
         return List.of(
-                getBook(),
+                getBook1(),
                 getBook2(),
                 getBook3(),
                 getBook4(),
@@ -93,6 +96,4 @@ public class TestHelper {
                 getBook6()
         );
     }
-
-
 }
