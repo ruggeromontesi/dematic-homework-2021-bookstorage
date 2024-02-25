@@ -80,6 +80,7 @@ public class BookService implements BookUseCase {
         return book.getQuantity() * book.getPrice();
     }
 
+    @Override
     public Map<Integer, Set<Integer>> getBarcodesGroupedByQuantity() {
         return repository.findAll().stream()
                 .collect(Collectors.groupingBy(Book::getQuantity, TreeMap::new,
@@ -87,6 +88,7 @@ public class BookService implements BookUseCase {
                 );
     }
 
+    @Override
     public Map<Integer, Set<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice() {
         Map<Integer, List<Book>> booksByQuantity = repository.findAll().stream()
                 .collect(Collectors.groupingBy(Book::getQuantity));
@@ -102,14 +104,17 @@ public class BookService implements BookUseCase {
 
     }
 
+    @Override
     public List<Book> findAll() {
         return repository.findAll();
     }
 
+    @Override
     public void deleteAll() {
         repository.deleteAll();
     }
 
+    @Override
     public void deleteById(int barcode) {
         repository.deleteById(barcode);
     }

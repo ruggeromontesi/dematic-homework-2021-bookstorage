@@ -14,4 +14,6 @@ public interface BookUseCase {
     Map<Integer, Set<Integer>> getBarcodesGroupedByQuantity();
     Map<Integer, Set<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice();
     List<Book> findAll();
+    void deleteAll();
+    void deleteById(int barcode);
 }

@@ -92,4 +92,14 @@ public class RuggeroBookService implements BookUseCase {
     public List<Book> findAll() {
         return null;
     }
+
+    @Override
+    public void deleteAll() {
+
+    }
+
+    @Override
+    public void deleteById(int barcode) {
+
+    }
 }
