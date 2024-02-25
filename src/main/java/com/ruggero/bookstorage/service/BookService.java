@@ -8,13 +8,19 @@ import com.ruggero.bookstorage.entities.errorsandexception.RepeatedBarcodeExcept
 import com.ruggero.bookstorage.repos.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Component("bookService")
@@ -75,7 +81,7 @@ public class BookService implements BookUseCase {
     }
 
     @Override
-    public double getTotalPriceByBarcode(int barcode){
+    public double getTotalPriceByBarcode(int barcode) {
         Book book = findByBarcode(barcode);
         return book.getQuantity() * book.getPrice();
     }
@@ -89,18 +95,53 @@ public class BookService implements BookUseCase {
     }
 
     @Override
-    public Map<Integer, Set<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice() {
-        Map<Integer, List<Book>> booksByQuantity = repository.findAll().stream()
-                .collect(Collectors.groupingBy(Book::getQuantity));
+    public Map<Integer, List<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice() {
+//        Map<Integer, List<Book>> booksByQuantity = repository.findAll().stream()
+//                .collect(Collectors.groupingBy(Book::getQuantity));
+//
+//        return booksByQuantity.entrySet().stream()
+//                .collect(Collectors.toMap(Map.Entry::getKey, e ->
+//                        e.getValue().stream()
+//                                .sorted(Comparator.comparingDouble(b -> b.getPrice() * b.getQuantity()))
+//                                .map(Book::getBarcode)
+//                                .collect(Collectors.toSet());
 
-        return booksByQuantity.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, e ->
-                        e.getValue().stream()
-                                .sorted(Comparator.comparingDouble(b -> b.getPrice() * b.getQuantity()))
-                                .map(Book::getBarcode)
-                                .collect(Collectors.toSet())
-                ));
 
+        Supplier<Map<Integer, Set<Book>>> supplier = HashMap::new;
+
+        BiConsumer<Map<Integer, Set<Book>>, Book> accumulator = (mapContainer, book) -> {
+            mapContainer.computeIfAbsent(book.getQuantity(), qty -> new TreeSet<>(Comparator.comparingDouble(Book::getTotalPrice)));
+            mapContainer.get(book.getQuantity()).add(book);
+        };
+
+        BinaryOperator<Map<Integer, Set<Book>>> combiner = (m1, m2) -> {
+            for (Integer qty : m2.keySet()) {
+                m1.computeIfAbsent(qty, missingKey -> {
+                    Set<Book> value = new TreeSet<>(Comparator.comparingDouble(Book::getTotalPrice));
+                    value.addAll(m2.get(qty));
+                    return value;
+                });
+                m1.get(qty).addAll(m2.get(qty));
+
+            }
+            return m1;
+        };
+
+        Function<Map<Integer, Set<Book>>, Map<Integer, List<Integer>>> finisher = integerSetMap -> {
+            Map<Integer, List<Integer>> sortedBooks = new HashMap<>();
+            for (int qty : integerSetMap.keySet()) {
+                List<Integer> barcodeList = integerSetMap.get(qty).stream().map(Book::getBarcode).collect(Collectors.toList());
+                sortedBooks.put(qty, barcodeList);
+            }
+            return sortedBooks;
+        };
+        Collector<Book, Map<Integer, Set<Book>>, Map<Integer, List<Integer>>> collector = Collector.of(
+                supplier,
+                accumulator,
+                combiner,
+                finisher);
+
+        return repository.findAll().stream().collect(collector);
 
     }
 

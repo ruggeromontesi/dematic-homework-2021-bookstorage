@@ -14,9 +14,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static com.ruggero.bookstorage.service.TestHelper.BARCODE_1;
+import static com.ruggero.bookstorage.service.TestHelper.PRICE_1_0;
+import static com.ruggero.bookstorage.service.TestHelper.QUANTITY_10;
 import static com.ruggero.bookstorage.service.TestHelper.getBook;
+import static com.ruggero.bookstorage.service.TestHelper.getBooks;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -70,17 +75,16 @@ public class BookIntegrationTest {
 
     @Test
     void shouldUpdate() {
-        RestTemplate restTemplate = new RestTemplate();
         Book book = getBook();
-        HttpEntity<Book> request = new HttpEntity<>(book);
-        restTemplate.postForObject(BASE_URL + "/create", request, Book.class);
+        service.create(book);
         Book updateBook = Book.builder()
                 .barcode(BARCODE_1)
                 .price(MODIFIED_PRICE)
                 .build();
 
-        HttpEntity<Book> request1 = new HttpEntity<>(updateBook);
-        var response = restTemplate.exchange(BASE_URL + "/update", HttpMethod.PUT, request1, Book.class ).getBody();
+        HttpEntity<Book> request = new HttpEntity<>(updateBook);
+        RestTemplate restTemplate = new RestTemplate();
+        Book response = restTemplate.exchange(BASE_URL + "/update", HttpMethod.PUT, request, Book.class).getBody();
 
         assertAll(
                 () -> assertThat(response.getBarcode()).isEqualTo(BARCODE_1),
@@ -89,5 +93,29 @@ public class BookIntegrationTest {
                 () -> assertThat(response.getAuthor()).isEqualTo(book.getAuthor()),
                 () -> assertThat(response.getQuantity()).isEqualTo(book.getQuantity())
         );
+    }
+
+    @Test
+    void shouldGetTotalPrice() {
+        service.create(getBook());
+        RestTemplate restTemplate = new RestTemplate();
+
+        Double response = restTemplate.getForObject(BASE_URL + "/" + BARCODE_1 + "/totalprice", Double.class);
+
+        assertAll(
+                () -> assertThat(response).isEqualTo(PRICE_1_0 * QUANTITY_10)
+        );
+    }
+
+    @Test
+    void shouldGetBooksGroupedByQuantitySortedByTotalPrice() {
+        getBooks().forEach(service::create);
+        RestTemplate restTemplate = new RestTemplate();
+
+        Map<Integer, List<Integer>> response = restTemplate.getForObject(BASE_URL + "/barcodes/grouped/quantity/totalprice", Map.class);
+        assertThat(response).isEqualTo(Map.of(
+                "1", List.of(6,5,4),
+                "10", List.of(1,2,3)
+        ));
     }
 }

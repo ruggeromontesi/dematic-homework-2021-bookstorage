@@ -12,7 +12,7 @@ public interface BookUseCase {
     Book updateBook(Book book);
     double getTotalPriceByBarcode(int barcode);
     Map<Integer, Set<Integer>> getBarcodesGroupedByQuantity();
-    Map<Integer, Set<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice();
+    Map<Integer, List<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice();
     List<Book> findAll();
     void deleteAll();
     void deleteById(int barcode);

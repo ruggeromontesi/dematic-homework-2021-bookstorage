@@ -75,7 +75,7 @@ public class BookController {
     /* A client can use a REST call to request a list of all barcodes for the books in stock grouped by quantity
       o Optional – barcodes for each group sorted by total price */
     @GetMapping("/barcodes/grouped/quantity/totalprice")
-    public ResponseEntity<Map<Integer, Set<Integer>>> barcodesGroupedByQuantityAndSortedByTotalPrice() {
+    public ResponseEntity<Map<Integer, List<Integer>>> barcodesGroupedByQuantityAndSortedByTotalPrice() {
         var result = bookService.getBarcodesGroupedByQuantityAndSortedByTotalPrice();
         return ResponseEntity.ok(result);
     }

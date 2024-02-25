@@ -84,7 +84,7 @@ public class RuggeroBookService implements BookUseCase {
     }
 
     @Override
-    public Map<Integer, Set<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice() {
+    public Map<Integer, List<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice() {
         return null;
     }
 
