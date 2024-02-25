@@ -39,7 +39,10 @@ public class Book {
     @Min(value = 0, message = "price cannot be negative")
     private Double price;
 
-    public double getTotalPrice() {
+    public Double getTotalPrice() {
+        if(quantity == null || price == null) {
+            return 0.0;
+        }
         return price * quantity;
     }
 }

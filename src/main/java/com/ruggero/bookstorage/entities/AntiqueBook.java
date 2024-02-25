@@ -26,7 +26,7 @@ public class AntiqueBook extends Book {
 	}
 	
 	/*** Total Price = Quantity * Price * (Current Year – Release Year) / 10 */
-	public double getTotalPrice(){
+	public Double getTotalPrice(){
 		return getQuantity()* getPrice() *((double)(LocalDate.now().getYear()-getReleaseYear())/10) ;
 	}
 }

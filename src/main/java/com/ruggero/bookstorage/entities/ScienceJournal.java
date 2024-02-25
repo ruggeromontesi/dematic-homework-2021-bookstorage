@@ -28,7 +28,7 @@ public class ScienceJournal extends Book {
 	}
 
 	/** Science journals Total Price = Quantity * Price * Science Index */
-	public double getTotalPrice() {
+	public Double getTotalPrice() {
 		return getQuantity() * getPrice() * getScienceIndex();
 	}
 }

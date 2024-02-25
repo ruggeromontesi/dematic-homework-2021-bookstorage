@@ -96,7 +96,7 @@ public class BookService implements BookUseCase {
         return booksByQuantity.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, e ->
                         e.getValue().stream()
-                                .sorted(Comparator.comparingDouble(Book::getTotalPrice))
+                                .sorted(Comparator.comparingDouble(b -> b.getPrice() * b.getQuantity()))
                                 .map(Book::getBarcode)
                                 .collect(Collectors.toSet())
                 ));
