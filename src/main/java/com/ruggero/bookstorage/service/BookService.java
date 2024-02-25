@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class BookService implements BookUseCase {
     private final BookRepository repository;
 
+    @Override
     public Book create(Book book) {
         validate(book.getBarcode());
         return repository.save(book);
@@ -45,6 +46,7 @@ public class BookService implements BookUseCase {
                 });
     }
 
+    @Override
     public Book findByBarcode(int barcode) {
         validateBarcode(barcode);
         List<Book> books = repository.findByBarcode(barcode);
@@ -57,6 +59,7 @@ public class BookService implements BookUseCase {
         return books.stream().findFirst().orElseThrow();
     }
 
+    @Override
     public Book updateBook(Book book) {
         Book retrievedBook = findByBarcode(book.getBarcode());
         Book updatedBook = Book.builder()
@@ -68,6 +71,12 @@ public class BookService implements BookUseCase {
                 .build();
 
         return repository.save(updatedBook);
+    }
+
+    @Override
+    public double getTotalPriceByBarcode(int barcode){
+        Book book = findByBarcode(barcode);
+        return book.getQuantity() * book.getPrice();
     }
 
     public Map<Integer, Set<Integer>> getBarcodesGroupedByQuantity() {

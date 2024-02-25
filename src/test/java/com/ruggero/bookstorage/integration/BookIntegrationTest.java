@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ruggero.bookstorage.controller.BookController;
 import com.ruggero.bookstorage.entities.Book;
+import com.ruggero.bookstorage.repos.BookRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class BookIntegrationTest {
     private static final String BOOKS_CREATE_URL = "http://localhost:8080/books/create";
     @Autowired
     private BookController controller;
+    @Autowired
+    private BookRepository repository;
     @Autowired
     private MockMvc mvc;
 
@@ -98,7 +101,7 @@ public class BookIntegrationTest {
 
         assertThat(response).isNotNull();
 
-        List<Book> books = controller.getBooks();
+        List<Book> books = repository.findAll();
         assertThat(books).isNotEmpty();
     }
 }
