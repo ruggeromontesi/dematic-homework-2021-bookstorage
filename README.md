@@ -1,7 +1,7 @@
 # bookstorage
 Project for the interview with Dematic in March 2021
 
-How to create a book:
+# How to create a book:
 curl -X 'POST'  'http://localhost:8080/books/create' -H "Content-Type: application/json"   -d '{
  "title": "titleA",
  "author": "autorA",
@@ -9,3 +9,8 @@ curl -X 'POST'  'http://localhost:8080/books/create' -H "Content-Type: applicati
  "quantity" : 5,
  "price": 40.5
  }'
+
+ # How to retrieve a book by barcode
+ curl -X 'GET' 'http://localhost:8080/books/10001'
+
+ 
