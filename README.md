@@ -4,7 +4,7 @@ Project for the interview with Dematic in March 2021
 # how to set up and run
 -Pull the code typing in command line: 
 
-  git clone https://github.com/ruggeromontesi/dematic-homework-2021-bookstorage.git
+ * git clone https://github.com/ruggeromontesi/dematic-homework-2021-bookstorage.git
 
 -Build the code typing : 
 
