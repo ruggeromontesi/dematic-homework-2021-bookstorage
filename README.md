@@ -30,6 +30,7 @@ curl -X 'POST'  'http://localhost:8080/books/create' -H "Content-Type: applicati
  curl -X 'GET' 'http://localhost:8080/books/10001'
 
  # How to dockerize
+ https://www.baeldung.com/dockerizing-spring-boot-application
  https://www.baeldung.com/java-dockerize-app
 
  
