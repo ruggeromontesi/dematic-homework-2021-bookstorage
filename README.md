@@ -34,7 +34,7 @@ curl -X 'POST'  'http://localhost:8080/books/create' -H "Content-Type: applicati
  https://www.baeldung.com/java-dockerize-app
 
  * docker build --tag=<YOUR_TAG>:latest .
- * docker run -p<PORT_NOT_CONTAINERIZED>:<PORT_CONTAINRERIZED> <YOUR_TAG>:latest
+ * docker run -p<PORT_NOT_CONTAINERIZED>:<PORT_CONTAINRERIZED> <YOUR_TAG>:latest --name==<YOUR_CONTAINER_NAME>
 
  * docker stop <CONTAINER_NAME>
  *docker start <CONTAINER_NAME>
