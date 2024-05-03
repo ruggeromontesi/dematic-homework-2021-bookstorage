@@ -1,4 +1,5 @@
 spring:
+
  datasource:
    url: jdbc:h2:mem:test
    username: ruggero
@@ -26,3 +27,11 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+
+
+springdoc:
+  swagger-ui:
+    operations-sorter: alpha
+    path: /
+
+
