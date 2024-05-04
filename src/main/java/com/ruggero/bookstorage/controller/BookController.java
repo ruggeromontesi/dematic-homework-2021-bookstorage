@@ -16,6 +16,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/books")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 public class BookController {
     private final BookUseCase bookService;
 
