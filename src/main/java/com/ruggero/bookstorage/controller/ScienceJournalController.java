@@ -24,7 +24,7 @@ public class ScienceJournalController {
 	 */
 	@PostMapping(value = "/sciencejournal")
 	public ScienceJournal createScienceJournal(@Valid @RequestBody ScienceJournal scienceJournal) {
-		util.validateBarcode(scienceJournal.getBarcode(), repository.findAll());
+		//util.validateBarcode(scienceJournal.getBarcode(), repository.findAll());
 		return repository.save(scienceJournal);
 	}
 }

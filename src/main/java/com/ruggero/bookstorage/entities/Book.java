@@ -6,18 +6,16 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.validation.annotation.Validated;
 
 
 @Entity
 @Validated
-@Data
+@Getter
 @RequiredArgsConstructor
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 public class Book {
 

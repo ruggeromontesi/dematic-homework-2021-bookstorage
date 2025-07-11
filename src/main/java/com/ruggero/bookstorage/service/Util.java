@@ -14,7 +14,8 @@ public class Util {
 		List<Book> listByBarcode = new ArrayList<>();
 
 		for (Book book : list)
-			if (book.getBarcode() == barcode)
+			//if (book.getBarcode() == barcode)
+			if (1 == barcode)
 				listByBarcode.add(book);
 
 		if (listByBarcode.isEmpty())
@@ -42,7 +43,8 @@ public class Util {
 
 		if (!list.isEmpty())
 			for (Book bookint : list)
-				if (bookint.getBarcode() == inputBarcode)
+				//if (bookint.getBarcode() == inputBarcode)
+				if (1 == inputBarcode)
 					throw new RepeatedBarcodeException(inputBarcode);
 
 		return true;
