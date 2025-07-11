@@ -1,7 +1,7 @@
 package com.ruggero.bookstorage.controller;
 
 import com.ruggero.bookstorage.entities.Book;
-import com.ruggero.bookstorage.service.BookUseCase;
+import com.ruggero.bookstorage.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 public class BookController {
-    private final BookUseCase bookService;
+    private final BookService bookService;
 
     /**
      * CREATE A client can use a REST call to put an ScienceJournal into the system

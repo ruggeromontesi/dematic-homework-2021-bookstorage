@@ -9,13 +9,7 @@ import com.ruggero.bookstorage.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -25,10 +19,9 @@ import java.util.stream.Collectors;
 
 @Component("bookService")
 @RequiredArgsConstructor
-public class BookService implements BookUseCase {
+public class BookService {
     private final BookRepository repository;
 
-    @Override
     public Book create(Book book) {
         validate(book.getBarcode());
         return repository.save(book);
@@ -53,7 +46,7 @@ public class BookService implements BookUseCase {
                 });
     }
 
-    @Override
+
     public Book findByBarcode(int barcode) {
         validateBarcode(barcode);
         List<Book> books = repository.findByBarcode(barcode);
@@ -66,7 +59,7 @@ public class BookService implements BookUseCase {
         return books.stream().findFirst().orElseThrow();
     }
 
-    @Override
+
     public Book updateBook(Book book) {
         Book retrievedBook = findByBarcode(book.getBarcode());
         Book updatedBook = Book.builder()
@@ -80,13 +73,13 @@ public class BookService implements BookUseCase {
         return repository.save(updatedBook);
     }
 
-    @Override
+
     public double getTotalPriceByBarcode(int barcode) {
         Book book = findByBarcode(barcode);
         return book.getQuantity() * book.getPrice();
     }
 
-    @Override
+
     public Map<Integer, Set<Integer>> getBarcodesGroupedByQuantity() {
         return repository.findAll().stream()
                 .collect(Collectors.groupingBy(Book::getQuantity, TreeMap::new,
@@ -94,7 +87,7 @@ public class BookService implements BookUseCase {
                 );
     }
 
-    @Override
+
     public Map<Integer, List<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice() {
         return repository.findAll().stream().collect(getBookMapMapCollector());
     }
@@ -131,17 +124,17 @@ public class BookService implements BookUseCase {
         return Collector.of(supplier, accumulator, combiner, finisher);
     }
 
-    @Override
+
     public List<Book> findAll() {
         return repository.findAll();
     }
 
-    @Override
+
     public void deleteAll() {
         repository.deleteAll();
     }
 
-    @Override
+
     public void deleteById(int barcode) {
         repository.deleteByBarcode(barcode);
     }

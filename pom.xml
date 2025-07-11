@@ -9,10 +9,10 @@
 		<version>3.5.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ruggero.bookstorage</groupId>
-	<artifactId>com.ruggero.bookstorage</artifactId>
-	<version>1.0.1</version>
-	<name>Dematic homework task March 2021</name>
+	<groupId>com.ruggero</groupId>
+	<artifactId>bookstorage</artifactId>
+	<version>2.0.1</version>
+	<name>homework</name>
 	<description>Homework for Dematic</description>
 	<properties>
 		<java.version>21</java.version>
