@@ -5,6 +5,8 @@ on:
       - dev
   pull_request:
     types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
 jobs:
   build:
     name: Build and analyze
