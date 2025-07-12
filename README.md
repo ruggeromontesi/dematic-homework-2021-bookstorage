@@ -39,4 +39,7 @@ curl -X 'POST'  'http://localhost:8080/books/create' -H "Content-Type: applicati
  * docker stop <CONTAINER_NAME>
  * docker start <CONTAINER_NAME>
 
- 
+# Connect to database
+H2 console available at:
+http://localhost:8080/h2-console user: ruggero pwd : 1234
+
