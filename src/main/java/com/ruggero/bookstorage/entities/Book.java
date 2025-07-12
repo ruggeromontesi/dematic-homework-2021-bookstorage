@@ -17,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 @RequiredArgsConstructor
 @SuperBuilder
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Book {
 
     @NotBlank

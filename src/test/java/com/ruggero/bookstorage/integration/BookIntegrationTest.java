@@ -1,7 +1,7 @@
 package com.ruggero.bookstorage.integration;
 
 import com.ruggero.bookstorage.entities.Book;
-import com.ruggero.bookstorage.service.BookUseCase;
+import com.ruggero.bookstorage.service.BookService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,12 +26,12 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class BookIntegrationTest {
+class BookIntegrationTest {
     private static final String BASE_URL = "http://localhost:8080/books";
     private static final double MODIFIED_PRICE = 22.2;
-    @Qualifier("bookService")
+    //@Qualifier("bookService")
     @Autowired
-    private BookUseCase service;
+    private BookService service;
 
     @BeforeEach
     public void cleanUp() {
