@@ -6,7 +6,8 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
-    inputs:
+  schedule:
+    - cron: '0 0 * * *'
 jobs:
   build:
     name: Build and analyze
