@@ -1,11 +1,11 @@
 package com.ruggero.bookstorage.controller;
 
+import com.ruggero.bookstorage.repository.GenericBookRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.ruggero.bookstorage.entities.ScienceJournal;
-import com.ruggero.bookstorage.repository.BookRepository;
 import com.ruggero.bookstorage.service.Util;
 
 
@@ -14,7 +14,7 @@ import com.ruggero.bookstorage.service.Util;
 public class ScienceJournalController {
 
 	@Autowired
-	BookRepository repository;
+	GenericBookRepository<ScienceJournal> repository;
 
 	Util util = new Util();
 

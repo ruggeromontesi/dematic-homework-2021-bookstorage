@@ -36,7 +36,7 @@ public class Util {
 			throw new NegativePriceException("negative price", price);
 	}
 
-	public boolean validateBarcode(int inputBarcode, List<Book> list) {
+	public <T extends Book> boolean  validateBarcode(int inputBarcode, List<T> list) {
 
 		if (inputBarcode < 0)
 			throw new IllegalBarcodeException(inputBarcode);
