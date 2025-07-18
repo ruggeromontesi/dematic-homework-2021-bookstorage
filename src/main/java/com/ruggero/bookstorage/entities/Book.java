@@ -1,7 +1,6 @@
 package com.ruggero.bookstorage.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -18,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 @SuperBuilder
 @AllArgsConstructor
 @EqualsAndHashCode
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Book {
 
     @NotBlank

@@ -1,6 +1,8 @@
 package com.ruggero.bookstorage.entities;
 
 import java.time.LocalDate;
+
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 
