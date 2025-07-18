@@ -1,7 +1,7 @@
 package com.ruggero.bookstorage.controller;
 
 import com.ruggero.bookstorage.entities.AntiqueBook;
-import com.ruggero.bookstorage.repository.BookRepository;
+import com.ruggero.bookstorage.repository.GenericBookRepository;
 import com.ruggero.bookstorage.service.Util;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AntiqueBookController {
 
-    private final BookRepository repository;
+    private final GenericBookRepository<AntiqueBook> repository;
 
     Util util = new Util();
 

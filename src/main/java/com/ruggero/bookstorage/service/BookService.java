@@ -5,7 +5,7 @@ import com.ruggero.bookstorage.entities.errorsandexception.BookNotFoundException
 import com.ruggero.bookstorage.entities.errorsandexception.ExistingBarcodeException;
 import com.ruggero.bookstorage.entities.errorsandexception.IllegalBarcodeException;
 import com.ruggero.bookstorage.entities.errorsandexception.RepeatedBarcodeException;
-import com.ruggero.bookstorage.repository.BookRepository;
+import com.ruggero.bookstorage.repository.GenericBookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Component("bookService")
 @RequiredArgsConstructor
 public class BookService {
-    private final BookRepository repository;
+    private final GenericBookRepository<Book> repository;
 
     public Book create(Book book) {
         validate(book.getBarcode());
@@ -73,12 +73,10 @@ public class BookService {
         return repository.save(updatedBook);
     }
 
-
     public double getTotalPriceByBarcode(int barcode) {
         Book book = findByBarcode(barcode);
         return book.getQuantity() * book.getPrice();
     }
-
 
     public Map<Integer, Set<Integer>> getBarcodesGroupedByQuantity() {
         return repository.findAll().stream()
@@ -86,7 +84,6 @@ public class BookService {
                         Collectors.mapping(Book::getBarcode, Collectors.toSet()))
                 );
     }
-
 
     public Map<Integer, List<Integer>> getBarcodesGroupedByQuantityAndSortedByTotalPrice() {
         return repository.findAll().stream().collect(getBookMapMapCollector());
@@ -124,7 +121,6 @@ public class BookService {
         return Collector.of(supplier, accumulator, combiner, finisher);
     }
 
-
     public List<Book> findAll() {
         return repository.findAll();
     }
@@ -133,7 +129,6 @@ public class BookService {
     public void deleteAll() {
         repository.deleteAll();
     }
-
 
     public void deleteById(int barcode) {
         repository.deleteByBarcode(barcode);

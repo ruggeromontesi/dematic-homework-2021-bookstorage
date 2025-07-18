@@ -3,7 +3,7 @@ package com.ruggero.bookstorage.service;
 import com.ruggero.bookstorage.entities.Book;
 import com.ruggero.bookstorage.entities.errorsandexception.IllegalBarcodeException;
 import com.ruggero.bookstorage.entities.errorsandexception.RepeatedBarcodeException;
-import com.ruggero.bookstorage.repository.BookRepository;
+import com.ruggero.bookstorage.repository.GenericBookRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,7 +29,7 @@ class BookServiceTest {
     @InjectMocks
     private BookService service;
     @Mock
-    private BookRepository repository;
+    private GenericBookRepository<Book> repository;
 
     @Test
     void shouldCreateBook_whenValidationOk() {
