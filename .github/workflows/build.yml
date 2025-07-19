@@ -7,7 +7,7 @@ on:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
   schedule:
-    - cron: '*/20 * * * *'
+    - cron: '* */12 * * *'
 jobs:
   build:
     name: Build and analyze
